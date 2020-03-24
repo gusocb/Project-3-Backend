@@ -21,21 +21,21 @@ router.post('/add',(req,res) => {
 });
 
 //Product Detail
-router.get('/:id',(req,res) => {
+router.get('/detail/:id',(req,res) => {
   Product.findById(req.params.id)
   .then(product => res.json(product))
   .catch(err => console.log(err))
 });
 
 //Update product
-router.post('/:id/update', (req, res) => {
+router.post('/update/:id', (req, res) => {
   Product.findByIdAndUpdate(req.params.id,{...req.body})
   .then(res.json('Product Updated'))
   .catch(err => console.log(err))
 });
 
 //Delete product
-router.delete('/:id', (req, res) => {
+router.delete('/detail/:id', (req, res) => {
   Product.findByIdAndDelete(req.params.id)
   .then(res.json('Product Deleted'))
   .catch(err => console.log(err))
