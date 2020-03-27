@@ -28,7 +28,7 @@ router.get('/detail/:id',(req,res) => {
 });
 
 //Update product
-router.post('/update/:id', (req, res) => {
+router.put('/detail/:id', (req, res) => {
   Product.findByIdAndUpdate(req.params.id,{...req.body})
   .then(res.json('Product Updated'))
   .catch(err => console.log(err))
