@@ -16,12 +16,12 @@ const productSchema = new Schema(
       trim: true
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
       trim: true
     },
     stock: {
-      type: String,
+      type: Number,
       required: true,
       trim: true
     }
