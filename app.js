@@ -9,6 +9,10 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const cors         = require('cors');
+const session       = require('express-session');
+const passport      = require('passport');
+
+require('./configs/passport');
 
 
 mongoose
@@ -49,6 +53,19 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
+
+//SESSION
+app.use(session({
+  secret:"some secret goes here",
+  resave: true,
+  saveUninitialized: true
+  })
+);
+
+
+// PASSPORT
+app.use(passport.initialize());
+app.use(passport.session());
 
 //CORS CONECTION TO REACT FRONTEND
 app.use(
