@@ -84,7 +84,7 @@ app.use('/', index);
 
 //Products
 const productsRoutes = require('./routes/product-routes');
-app.use('/products',productsRoutes);
+app.use('/api',productsRoutes);
 
 //Authorization
 const authRoutes = require('./routes/auth-routes');
