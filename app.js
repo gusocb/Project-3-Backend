@@ -90,5 +90,9 @@ app.use('/api',productsRoutes);
 const authRoutes = require('./routes/auth-routes');
 app.use('/api', authRoutes);
 
+//Checkout
+const checkoutRoutes = require('./routes/sales-routes');
+app.use('/api', checkoutRoutes);
+
 
 module.exports = app;
