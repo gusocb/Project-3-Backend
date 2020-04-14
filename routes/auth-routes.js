@@ -8,7 +8,7 @@ const User       = require('../models/User');
 
 
 authRoutes.post('/signup', (req, res, next) => {
-    const {name, lastname, store, email, password} = req.body
+    const {name, lastname, store, username, password} = req.body
   
     if (!name) {
       res.status(400).json({ message: 'Provide name' });
@@ -24,8 +24,8 @@ authRoutes.post('/signup', (req, res, next) => {
         res.status(400).json({ message: 'Provide store' });
         return;
       }
-    if (!email) {
-        res.status(400).json({ message: 'Provide email' });
+    if (!username) {
+        res.status(400).json({ message: 'Provide username' });
         return;
       }
 
@@ -39,15 +39,15 @@ authRoutes.post('/signup', (req, res, next) => {
         return;
     }
   
-    User.findOne({ email }, (err, foundUser) => {
+    User.findOne({ username }, (err, foundUser) => {
 
         if(err){
-            res.status(500).json({message: "Email check went bad."});
+            res.status(500).json({message: "username check went bad."});
             return;
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Email taken. Choose another one.' });
+            res.status(400).json({ message: 'username taken. Choose another one.' });
             return;
         }
   
@@ -58,7 +58,7 @@ authRoutes.post('/signup', (req, res, next) => {
             name:name,
             lastname:lastname,
             store:store,
-            email:email,
+            username:username,
             password: hashPass
         });
   
