@@ -8,13 +8,31 @@ const User       = require('../models/User');
 
 
 authRoutes.post('/signup', (req, res, next) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const {name, lastname, store, username, password} = req.body
   
-    if (!username || !password) {
-      res.status(400).json({ message: 'Provide username and password' });
+    if (!name) {
+      res.status(400).json({ message: 'Provide name' });
       return;
     }
+
+    if (!lastname) {
+        res.status(400).json({ message: 'Provide lastname' });
+        return;
+      }
+
+    if (!store) {
+        res.status(400).json({ message: 'Provide store' });
+        return;
+      }
+    if (!username) {
+        res.status(400).json({ message: 'Provide username' });
+        return;
+      }
+
+    if (!password) {
+        res.status(400).json({ message: 'Provide password' });
+        return;
+      }
 
     if(password.length < 7){
         res.status(400).json({ message: 'Please make your password at least 8 characters long for security purposes.' });
@@ -24,12 +42,12 @@ authRoutes.post('/signup', (req, res, next) => {
     User.findOne({ username }, (err, foundUser) => {
 
         if(err){
-            res.status(500).json({message: "Username check went bad."});
+            res.status(500).json({message: "username check went bad."});
             return;
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Username taken. Choose another one.' });
+            res.status(400).json({ message: 'username taken. Choose another one.' });
             return;
         }
   
@@ -37,6 +55,9 @@ authRoutes.post('/signup', (req, res, next) => {
         const hashPass = bcrypt.hashSync(password, salt);
   
         const aNewUser = new User({
+            name:name,
+            lastname:lastname,
+            store:store,
             username:username,
             password: hashPass
         });

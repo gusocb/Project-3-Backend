@@ -17,7 +17,8 @@ passport.deserializeUser((userIdFromSession, cb) => {
   });
 });
 
-passport.use(new LocalStrategy((username, password, next) => {
+passport.use(new LocalStrategy(  
+  (username, password, next) => {
   User.findOne({ username }, (err, foundUser) => {
     if (err) {
       next(err);
@@ -25,7 +26,7 @@ passport.use(new LocalStrategy((username, password, next) => {
     }
 
     if (!foundUser) {
-      next(null, false, { message: 'Incorrect username.' });
+      next(null, false, { message: 'Incorrect email.' });
       return;
     }
 
@@ -37,3 +38,4 @@ passport.use(new LocalStrategy((username, password, next) => {
     next(null, foundUser);
   });
 }));
+
