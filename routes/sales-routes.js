@@ -6,9 +6,9 @@ let Sale = require('../models/Sale')
 router.post('/checkout',(req,res) => {
     
     Sale.create({ 
-        sale: ['jon', 'gus','pepe'],
-        total:15,
-        owner:'el chido'
+        sale:req.body.sale ,
+        total:req.body.total,
+        owner:req.body.owner
     })
       .then(() => res.json('sale added'))
       .catch(err => console.log(err))
