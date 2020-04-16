@@ -9,7 +9,8 @@ router.post('/checkout', (req,res) => {
     Sale.create({ 
         sale:req.body.sale ,
         total:req.body.total,
-        owner:req.body.owner
+        owner:req.body.owner,
+        store:req.body.store
     })
     .then(()=> res.json('sale added'))
     .catch(err => console.log(err))

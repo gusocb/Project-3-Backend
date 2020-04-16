@@ -57,8 +57,8 @@ app.locals.title = 'Express - Generated with IronGenerator';
 //SESSION
 app.use(session({
   secret:"some secret goes here",
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
   })
 );
 

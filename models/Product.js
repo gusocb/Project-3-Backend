@@ -24,7 +24,8 @@ const productSchema = new Schema(
       type: Number,
       required: true,
       trim: true
-    }
+    },
+    store:String
   },
   {
     timestamps: true

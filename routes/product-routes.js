@@ -4,16 +4,16 @@ let Product = require('../models/Product')
 
 
 //All products
-router.get('/products/', (req, res) => {
-  Product.find()
+router.get('/products', (req, res) => {
+  Product.find({store:req.user.store})
   .then(products => res.json(products))
   .catch(err => console.log(err))
 });
 
 //Add product
 router.post('/products/add',(req,res) => {
-  const {barcode, name, price, stock} = req.body;
-  const newProduct = new Product ({barcode, name, price, stock});
+  const {barcode, name, price, stock, store} = req.body;
+  const newProduct = new Product ({barcode, name, price, stock,store});
 
   newProduct.save()
   .then(() => res.json('Product Added'))

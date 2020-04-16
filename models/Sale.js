@@ -4,7 +4,8 @@ const Schema   = mongoose.Schema;
 const saleSchema = new Schema({
     sale: [],
     total:Number,
-    owner:String
+    owner:String,
+    store:String,
   }, 
 {
   timestamps: true
