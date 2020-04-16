@@ -4,8 +4,8 @@ let Product = require('../models/Product')
 
 
 //All products
-router.get('/products/', (req, res) => {
-  Product.find()
+router.get('/products', (req, res) => {
+  Product.find({store:req.user.store})
   .then(products => res.json(products))
   .catch(err => console.log(err))
 });
