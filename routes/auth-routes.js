@@ -59,7 +59,8 @@ authRoutes.post('/signup', (req, res, next) => {
             lastname:lastname,
             store:store,
             username:username,
-            password: hashPass
+            password: hashPass,
+            role:'ADMIN'
         });
   
         aNewUser.save(err => {
