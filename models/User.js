@@ -7,10 +7,11 @@ const userSchema = new Schema({
   store: String,
   username: String,
   password: String,
-  role:{
+  role:
+  {
     type: String,
-    enum: [],
-    default: 'ADMIN'
+    enum: ['admin', 'user'],
+    default: 'admin'
   }
 }, 
 {
