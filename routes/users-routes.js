@@ -36,10 +36,10 @@ router.post('/users/add', (req, res) => {
         return;
     }
 
-    // if (!role) {
-    //     res.status(400).json({ message: 'Provide role' });
-    //     return;
-    //   }
+    if (!role) {
+        res.status(400).json({ message: 'Provide role' });
+        return;
+      }
   
     User.findOne({ username }, (err, foundUser) => {
 

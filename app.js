@@ -16,7 +16,7 @@ require('./configs/passport');
 
 
 mongoose
-  .connect('mongodb://localhost/project-3-backend', {useNewUrlParser: true},)
+  .connect(`mongodb+srv://${process.env.USER_DB}:${process.env.PASSWORD_DB}@clusterpos-di6hl.mongodb.net/Project-3?retryWrites=true&w=majority`, {useNewUrlParser: true},)
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -57,8 +57,8 @@ app.locals.title = 'Express - Generated with IronGenerator';
 //SESSION
 app.use(session({
   secret:"some secret goes here",
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true
   })
 );
 
