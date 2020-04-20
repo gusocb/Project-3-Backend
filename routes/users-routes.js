@@ -91,6 +91,7 @@ router.get('/users', (req, res) => {
     .then(user => res.json(user))
     .catch(err => console.log(err))
   });
+
   
   //Update User
   router.put('/users/detail/:id', (req, res) => {

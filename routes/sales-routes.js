@@ -1,7 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 let Sale = require('../models/Sale')
-let Product = require('../models/Product')
+let Product = require('../models/Product');
 
 //Add sale
 router.post('/checkout', (req,res) => {
@@ -19,6 +19,13 @@ router.post('/checkout', (req,res) => {
         await Product.findByIdAndUpdate(ele._id,{stock:ele.newStock})
     })
 });
+
+//All sales
+router.get('/sales', (req, res) => {
+    Sale.find({store:req.user.store})
+    .then(sales => res.json(sales))
+    .catch(err => console.log(err))
+})
 
 module.exports = router;
 
