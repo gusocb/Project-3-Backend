@@ -2,6 +2,9 @@ const express = require('express');
 const router  = express.Router();
 let Product = require('../models/Product')
 
+//Roles middleware
+const checkRoles = require('../middlewares/checkRoles')
+
 
 //All products
 router.get('/products', (req, res) => {
@@ -11,7 +14,7 @@ router.get('/products', (req, res) => {
 });
 
 //Add product
-router.post('/products/add',(req,res) => {
+router.post('/products/add',checkRoles('admin'),(req,res) => {
   const {barcode, name, price, stock, store} = req.body;
   const newProduct = new Product ({barcode, name, price, stock,store});
 
@@ -21,21 +24,21 @@ router.post('/products/add',(req,res) => {
 });
 
 //Product Detail
-router.get('/products/detail/:id',(req,res) => {
+router.get('/products/detail/:id',checkRoles('admin'),(req,res) => {
   Product.findById(req.params.id)
   .then(product => res.json(product))
   .catch(err => console.log(err))
 });
 
 //Update product
-router.put('/products/detail/:id', (req, res) => {
+router.put('/products/detail/:id', checkRoles('admin'),(req, res) => {
   Product.findByIdAndUpdate(req.params.id,{...req.body})
   .then(res.json('Product Updated'))
   .catch(err => console.log(err))
 });
 
 //Delete product
-router.delete('/products/detail/:id', (req, res) => {
+router.delete('/products/detail/:id', checkRoles('admin'), (req, res) => {
   Product.findByIdAndDelete(req.params.id)
   .then(res.json('Product Deleted'))
   .catch(err => console.log(err))
