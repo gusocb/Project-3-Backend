@@ -21,7 +21,7 @@ router.post('/checkout', (req,res) => {
     req.body.sale.forEach( async ele => {
         await Product.findByIdAndUpdate(ele._id,{stock:ele.newStock})
     })
-});
+})
 
 //All sales
 router.get('/sales', checkRoles('admin'),(req, res) => {

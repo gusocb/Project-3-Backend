@@ -16,11 +16,32 @@ router.get('/products', (req, res) => {
 //Add product
 router.post('/products/add',checkRoles('admin'),(req,res) => {
   const {barcode, name, price, stock, store} = req.body;
+
+  Product.findOne({store:req.user.store,barcode:barcode}, (err,foundProduct) =>{
+    if(err){
+      res.status(500).json({message: "product check went bad."});
+      return;
+  }
+
+  if (foundProduct) {
+      res.status(401).json({ message: 'barcode taken. Choose another one.' });
+      return;
+  }
+
   const newProduct = new Product ({barcode, name, price, stock,store});
 
-  newProduct.save()
-  .then(() => res.json('Product Added'))
-  .catch(err => console.log(err))
+  newProduct.save(err => {
+    if (err) {
+        res.status(400).json({ message: 'Saving product to database went wrong.' });
+        return;
+    }
+    else {
+      res.json({message: 'New product added'})
+    }
+
+});
+
+  })
 });
 
 //Product Detail

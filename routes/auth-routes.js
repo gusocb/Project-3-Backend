@@ -6,37 +6,9 @@ const bcrypt     = require('bcryptjs');
 
 const User       = require('../models/User');
 
+//Register new user
 authRoutes.post('/signup', (req, res, next) => {
     const {name, lastname, store, username, password} = req.body
-  
-    if (!name) {
-      res.status(400).json({ message: 'Provide name' });
-      return;
-    }
-
-    if (!lastname) {
-        res.status(400).json({ message: 'Provide lastname' });
-        return;
-      }
-
-    if (!store) {
-        res.status(400).json({ message: 'Provide store' });
-        return;
-      }
-    if (!username) {
-        res.status(400).json({ message: 'Provide username' });
-        return;
-      }
-
-    if (!password) {
-        res.status(400).json({ message: 'Provide password' });
-        return;
-      }
-
-    if(password.length < 7){
-        res.status(400).json({ message: 'Please make your password at least 8 characters long for security purposes.' });
-        return;
-    }
   
     User.findOne({ username }, (err, foundUser) => {
 
@@ -46,7 +18,7 @@ authRoutes.post('/signup', (req, res, next) => {
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'username taken. Choose another one.' });
+            res.status(401).json({ message: 'username taken. Choose another one.' });
             return;
         }
   

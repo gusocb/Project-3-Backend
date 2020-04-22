@@ -6,43 +6,9 @@ const User       = require('../models/User');
 //ROLES MIDDLEWARE
 const checkRoles = require('../middlewares/checkRoles')
 
-
+//Add new user
 router.post('/users/add', checkRoles('admin'),(req, res) => {
     const {name, lastname, store, username, password, role} = req.body
-  
-    if (!name) {
-      res.status(400).json({ message: 'Provide name' });
-      return;
-    }
-
-    if (!lastname) {
-        res.status(400).json({ message: 'Provide lastname' });
-        return;
-      }
-
-    if (!store) {
-        res.status(400).json({ message: 'Provide store' });
-        return;
-      }
-    if (!username) {
-        res.status(400).json({ message: 'Provide username' });
-        return;
-      }
-
-    if (!password) {
-        res.status(400).json({ message: 'Provide password' });
-        return;
-      }
-
-    if(password.length < 7){
-        res.status(400).json({ message: 'Please make your password at least 8 characters long for security purposes.' });
-        return;
-    }
-
-    if (!role) {
-        res.status(400).json({ message: 'Provide role' });
-        return;
-      }
   
     User.findOne({ username }, (err, foundUser) => {
 
@@ -52,7 +18,7 @@ router.post('/users/add', checkRoles('admin'),(req, res) => {
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'username taken. Choose another one.' });
+            res.status(401).json({ message: 'username taken. Choose another one.' });
             return;
         }
   
