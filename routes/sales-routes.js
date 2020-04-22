@@ -12,7 +12,7 @@ router.post('/checkout', (req,res) => {
     Sale.create({ 
         sale:req.body.sale ,
         total:req.body.total,
-        owner:req.body.owner,
+        salesMan:req.body.salesMan,
         store:req.body.store
     })
     .then(()=> res.json('sale added'))
@@ -25,7 +25,7 @@ router.post('/checkout', (req,res) => {
 
 //All sales
 router.get('/sales', checkRoles('admin'),(req, res) => {
-    Sale.find({store:req.user.store})
+    Sale.find({store:req.user.store}).populate('salesMan')
     .then(sales => res.json(sales))
     .catch(err => console.log(err))
 })

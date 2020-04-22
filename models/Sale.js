@@ -4,7 +4,10 @@ const Schema   = mongoose.Schema;
 const saleSchema = new Schema({
     sale: [],
     total:Number,
-    owner:String,
+    salesMan:{
+      type:Schema.Types.ObjectId,
+      ref:'User'
+    },
     store:String,
   }, 
 {
