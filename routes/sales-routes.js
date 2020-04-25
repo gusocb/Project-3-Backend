@@ -30,5 +30,12 @@ router.get('/sales', checkRoles('admin'),(req, res) => {
     .catch(err => console.log(err))
 })
 
+//Sale Detail
+router.get('/sales/detail/:id',checkRoles('admin'),(req,res) => {
+    Sale.findById(req.params.id).populate('salesMan')
+    .then(sale => res.json(sale))
+    .catch(err => console.log(err))
+  });
+
 module.exports = router;
 
